@@ -33,7 +33,6 @@ public class GUIUserFrame extends JFrame {
 		final List<StudentDetails> studentDetailList = new ArrayList<>();
 		actionController = new ActionController(studentDetailList);
 
-	
 		final JFrame jFrame = new JFrame("Queue Status");
 		final JLabel empty_indicatorJLabel = new JLabel("Queue is empty!", SwingConstants.CENTER);
 		final JLabel header = new JLabel("N  A  M  E", SwingConstants.CENTER);
@@ -57,14 +56,21 @@ public class GUIUserFrame extends JFrame {
 		removeEntry.setEnabled(false);
 		removeEntry.setFocusable(false);
 
-		p1.add(p3);
-		p1.add(p4);
 		panel3.add(addEntry);
 		panel3.add(pauseEntry);
 		panel3.add(unpauseEntry);
+		panel3.add(removeEntry);
+		panel3.setLayout(new FlowLayout(FlowLayout.CENTER));
+		panel4.add(indicator);
+		panel1.add(panel3);
 		panel1.add(panel4);
 		panel1.setLayout(new BoxLayout(panel1, BoxLayout.Y_AXIS));
 		panel1.setBorder(new EmptyBorder(10, 10, 10, 10));
+
+		final UserContainerWindowListener userContainerWindowListener = new UserContainerWindowListener(
+				studentDetailList, empty_indicatorJLabel);
+		jFrame.addWindowListener(userContainerWindowListener);
+
 		final ListSelectionListener listSelectionListener = new ListSelectionListener() {
 
 			@Override
@@ -83,17 +89,19 @@ public class GUIUserFrame extends JFrame {
 					if (selectedStudentDetails.isPaused()) {
 						unpauseEntry.setEnabled(true);
 						unpauseEntry.setFocusable(true);
-					} else {	
+					} else {
 						pauseEntry.setEnabled(true);
 						pauseEntry.setFocusable(true);
 					}
 				}
 			}
 		};
-		studentList.addListSelectionListener(listSelectionListener);
 		
+		studentList.addListSelectionListener(listSelectionListener);
 		studentList.setCellRenderer(new PausedCellRenderer(actionController));
 		studentList.setModel(actionController);
+		studentList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		studentList.setLayoutOrientation(JList.VERTICAL);
 
 		final ActionListener actionListener = new ButtonActionListeners(actionController);
 		addEntry.addActionListener(actionListener);
@@ -101,11 +109,6 @@ public class GUIUserFrame extends JFrame {
 		pauseEntry.addActionListener(actionListener);
 		unpauseEntry.addActionListener(actionListener);
 
-
-		jFrame.setSize(600, 300);
-		jFrame.setVisible(true);
-
-		studentList.setModel(actionController);
 		actionController.setQueueListListenerCallBack(listSelectionListener);
 
 		actionController.addEntry(new StudentDetails("Avinash", "s", "ss", false));
@@ -114,32 +117,6 @@ public class GUIUserFrame extends JFrame {
 		actionController.addEntry(new StudentDetails("Mahesh", "s", "ss", false));
 		actionController.addEntry(new StudentDetails("Swathi", "s", "ss", false));
 
-		// studentList.setPreferredSize(new Dimension(400, 360));
-		studentList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		studentList.setLayoutOrientation(JList.VERTICAL);
-		JScrollPane tablePane = new JScrollPane(studentList);
-		tablePane.setPreferredSize(new Dimension(300, 150));
-
-		p2.add(tablePane);
-		
-		Font f = new Font(Font.SANS_SERIF, Font.BOLD, 10);
-		
-		header.setFont(f);
-		header.setFont (header.getFont ().deriveFont (20.0f));
-		header.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
-	    tablePane.setViewportView(studentList);
-	    tablePane.setColumnHeaderView(header);
-
-
-	    jFrame.add(p1);
-	    jFrame.setLocationRelativeTo(null);
-	    jFrame.add(p2, BorderLayout.CENTER);
-	    jFrame.add(p1, BorderLayout.NORTH);
-	    jFrame.add(empty_indicatorJLabel, BorderLayout.SOUTH);
-
-			@Override
-			public void windowOpened(final WindowEvent e) {
-				// TODO Auto-generated method stub
 
 		tablePane.setPreferredSize(new Dimension(350, 150));
 
