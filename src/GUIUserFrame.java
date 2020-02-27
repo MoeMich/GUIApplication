@@ -28,7 +28,7 @@ public class GUIUserFrame extends JFrame {
 	private int updatedIndex;
 
 	public GUIUserFrame() {
-		
+
 		final JList<StudentDetails> studentList = new JList<>();
 		final List<StudentDetails> studentDetailList = new ArrayList<>();
 		actionController = new ActionController(studentDetailList);
@@ -43,7 +43,7 @@ public class GUIUserFrame extends JFrame {
 		final JPanel panel2 = new JPanel();
 		final JPanel panel3 = new JPanel();
 		final JPanel panel4 = new JPanel();
-		
+
 		final JButton addEntry = new JButton("AddEntry");
 		final JButton pauseEntry = new JButton("PauseEntry");
 		final JButton unpauseEntry = new JButton("UnpauseEntry");
@@ -96,7 +96,7 @@ public class GUIUserFrame extends JFrame {
 				}
 			}
 		};
-		
+
 		studentList.addListSelectionListener(listSelectionListener);
 		studentList.setCellRenderer(new PausedCellRenderer(actionController));
 		studentList.setModel(actionController);
@@ -116,7 +116,6 @@ public class GUIUserFrame extends JFrame {
 		actionController.addEntry(new StudentDetails("Moe", "s", "ss", false));
 		actionController.addEntry(new StudentDetails("Mahesh", "s", "ss", false));
 		actionController.addEntry(new StudentDetails("Swathi", "s", "ss", false));
-
 
 		tablePane.setPreferredSize(new Dimension(350, 150));
 

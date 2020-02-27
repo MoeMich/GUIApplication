@@ -1,5 +1,5 @@
-import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.AbstractListModel;
 import javax.swing.event.ListSelectionListener;
 
@@ -57,7 +57,7 @@ public class ActionController extends AbstractListModel implements ComponentList
 		fireContentsChanged(entryToBePaused, getSize(), getSize());
 		listSelectionListener.valueChanged(null);
 	}
-	
+
 	@Override
 	public StudentDetails getElementAt(int index) {
 		return studentDetailsList.get(index);

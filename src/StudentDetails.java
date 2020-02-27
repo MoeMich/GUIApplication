@@ -6,14 +6,14 @@ public class StudentDetails {
 	private String sessionPassword;
 	private boolean isPaused;
 
-    StudentDetails(String name, String emailAddress, String sessionPassword, boolean isPaused){
-        this.name = name;
-        this.emailAddress = emailAddress;
-        this.sessionPassword = sessionPassword;
-        this.isPaused = isPaused;
-    }
- 
-    public void setName(String name) {
+	StudentDetails(String name, String emailAddress, String sessionPassword, boolean isPaused) {
+		this.name = name;
+		this.emailAddress = emailAddress;
+		this.sessionPassword = sessionPassword;
+		this.isPaused = isPaused;
+	}
+
+	public void setName(String name) {
 		this.name = name;
 	}
 
@@ -30,24 +30,24 @@ public class StudentDetails {
 	}
 
 	public String getName() {
-        return name;
-    }
+		return name;
+	}
 
-    public String getEmailAddress() {
-        return emailAddress;
-    }
+	public String getEmailAddress() {
+		return emailAddress;
+	}
 
-    public String getSessionPassword() {
-        return sessionPassword;
-    }
+	public String getSessionPassword() {
+		return sessionPassword;
+	}
 
-    public boolean isPaused() {
-        return isPaused;
-    }
-    
-    @Override
-    public String toString() {
-        return name;
-    }
+	public boolean isPaused() {
+		return isPaused;
+	}
+
+	@Override
+	public String toString() {
+		return name;
+	}
 
 }
