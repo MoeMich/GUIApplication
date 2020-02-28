@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -37,6 +38,7 @@ public class GUIUserFrame extends JFrame {
 		final JLabel empty_indicatorJLabel = new JLabel("Queue is empty!", SwingConstants.CENTER);
 		final JLabel header = new JLabel("N  A  M  E", SwingConstants.CENTER);
 		final JLabel indicator = new JLabel("Red text means paused users");
+		indicator.setForeground(Color.RED);
 		final JScrollPane tablePane = new JScrollPane(studentList);
 
 		final JPanel panel1 = new JPanel();
@@ -134,7 +136,7 @@ public class GUIUserFrame extends JFrame {
 		jFrame.add(empty_indicatorJLabel, BorderLayout.SOUTH);
 		empty_indicatorJLabel.setBorder(new EmptyBorder(10, 5, 30, 5));
 
-		jFrame.setSize(500, 350);
+		jFrame.setSize(550, 350);
 		jFrame.setVisible(true);
 		jFrame.setLocationRelativeTo(null);
 		jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
