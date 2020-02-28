@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -22,7 +23,7 @@ public class ActionFrame extends JFrame implements ActionListener {
 	 */
 	public ActionFrame(String action) {
 		this.action = action;
-		setBounds(100, 100, 450, 300);
+		setBounds(30, 30, 350, 350);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -48,16 +49,16 @@ public class ActionFrame extends JFrame implements ActionListener {
 			emailField.setColumns(10);
 		}
 
-		JButton actionButton = new JButton(action);
-		actionButton.setBounds(144, 171, 196, 29);
+		final JButton actionButton = new JButton(action);
+		actionButton.setBounds(70, 200, 196, 29);
 		contentPane.add(actionButton);
 
-		JLabel sessionPassword = new JLabel("Session Password");
-		sessionPassword.setBounds(30, 109, 130, 46);
+		final JLabel sessionPassword = new JLabel("Session Password");
+		sessionPassword.setBounds(25, 100, 130, 46);
 		contentPane.add(sessionPassword);
 
 		sessionPasswordField = new JTextField();
-		sessionPasswordField.setBounds(175, 119, 130, 26);
+		sessionPasswordField.setBounds(185, 110, 130, 26);
 		contentPane.add(sessionPasswordField);
 		sessionPasswordField.setColumns(10);
 		actionButton.addActionListener(this);
@@ -65,6 +66,12 @@ public class ActionFrame extends JFrame implements ActionListener {
 
 	public void setCallBack(ComponentListener componentListener) {
 		this.componentListener = componentListener;
+	}
+	
+	public void setErrorMessage() {
+		JOptionPane.showMessageDialog(null,
+		          "Error: Please enter all the details", "Error Message",
+		          JOptionPane.ERROR_MESSAGE);
 	}
 
 	@Override
@@ -75,29 +82,51 @@ public class ActionFrame extends JFrame implements ActionListener {
 			String email = emailField.getText();
 			String sname = nameField.getText();
 			String sPassword = sessionPasswordField.getText();
-			componentListener.addEntry(new StudentDetails(sname, email, sPassword, false));
+			if(!email.isEmpty() && !sname.isEmpty() && !sPassword.isEmpty()) {
+				componentListener.addEntry(new StudentDetails(sname, email, sPassword, false));
+				dispose();
+			}
+			else {
+				setErrorMessage();
+			}
 			break;
 
 		case "RemoveEntry":
 			sPassword = sessionPasswordField.getText();
-			componentListener.removeEntry(sPassword);
+			if(!sPassword.isEmpty()) {
+				componentListener.removeEntry(sPassword);
+				dispose();
+			}
+			else {
+				setErrorMessage();
+			}
 			break;
 
 		case "PauseEntry":
 			sPassword = sessionPasswordField.getText();
-			componentListener.pauseEntry(sPassword);
+			if(!sPassword.isEmpty()) {
+				componentListener.pauseEntry(sPassword);
+				dispose();
+			}
+			else {
+				setErrorMessage();
+			}
 			break;
 
 		case "UnpauseEntry":
-			System.out.println("Came to unpause switch");
 			sPassword = sessionPasswordField.getText();
-			componentListener.unpauseEntry(sPassword);
+			if(!sPassword.isEmpty()) {
+				componentListener.unpauseEntry(sPassword);
+				dispose();
+			}
+			else {
+				setErrorMessage();
+			}
 			break;
 
 		default:
 			break;
 		}
-		dispose();
 	}
 
 }

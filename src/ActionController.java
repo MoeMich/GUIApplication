@@ -5,10 +5,10 @@ import javax.swing.event.ListSelectionListener;
 
 public class ActionController extends AbstractListModel implements ComponentListener {
 
-	protected List<StudentDetails> studentDetailsList;
-	protected StudentDetails removalEntry, entryToBePaused, entryToBeUnPaused;
-	ListSelectionListener listSelectionListener;
-	int updatedIndex;
+	private List<StudentDetails> studentDetailsList;
+	private StudentDetails removalEntry, entryToBePaused, entryToBeUnPaused;
+	private ListSelectionListener listSelectionListener;
+	private int updatedIndex;
 
 	public ActionController(List<StudentDetails> studentDetailsList) {
 		this.studentDetailsList = studentDetailsList;
@@ -26,6 +26,7 @@ public class ActionController extends AbstractListModel implements ComponentList
 	public void addEntry(StudentDetails studentDetails) {
 		studentDetailsList.add(studentDetails);
 		fireContentsChanged(studentDetails, getSize(), getSize());
+		listSelectionListener.valueChanged(null);
 	}
 
 	@Override
@@ -44,7 +45,6 @@ public class ActionController extends AbstractListModel implements ComponentList
 		}
 		fireContentsChanged(entryToBePaused, getSize(), getSize());
 		listSelectionListener.valueChanged(null);
-
 	}
 
 	@Override

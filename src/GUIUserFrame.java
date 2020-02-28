@@ -37,14 +37,17 @@ public class GUIUserFrame extends JFrame {
 		final JFrame jFrame = new JFrame("Queue Status");
 		final JLabel empty_indicatorJLabel = new JLabel("Queue is empty!", SwingConstants.CENTER);
 		final JLabel header = new JLabel("N  A  M  E", SwingConstants.CENTER);
-		final JLabel indicator = new JLabel("Red text means paused users");
-		indicator.setForeground(Color.RED);
+		final JLabel redIndicator = new JLabel("Red text--->Paused");
+		redIndicator.setForeground(Color.RED);
+		final JLabel blackIndicator = new JLabel("Black text--->Unpaused");
+		blackIndicator.setForeground(Color.black);
 		final JScrollPane tablePane = new JScrollPane(studentList);
 
 		final JPanel panel1 = new JPanel();
 		final JPanel panel2 = new JPanel();
 		final JPanel panel3 = new JPanel();
 		final JPanel panel4 = new JPanel();
+		final JPanel panel5 = new JPanel();
 
 		final JButton addEntry = new JButton("AddEntry");
 		final JButton pauseEntry = new JButton("PauseEntry");
@@ -63,9 +66,11 @@ public class GUIUserFrame extends JFrame {
 		panel3.add(unpauseEntry);
 		panel3.add(removeEntry);
 		panel3.setLayout(new FlowLayout(FlowLayout.CENTER));
-		panel4.add(indicator);
+		panel4.add(redIndicator);
+		panel5.add(blackIndicator);
 		panel1.add(panel3);
 		panel1.add(panel4);
+		panel1.add(panel5);
 		panel1.setLayout(new BoxLayout(panel1, BoxLayout.Y_AXIS));
 		panel1.setBorder(new EmptyBorder(10, 10, 10, 10));
 
@@ -84,7 +89,7 @@ public class GUIUserFrame extends JFrame {
 				unpauseEntry.setEnabled(false);
 				unpauseEntry.setFocusable(false);
 				pauseEntry.setFocusable(false);
-				if (studentDetailList.size() != updatedIndex) {
+				if (studentDetailList.size() != updatedIndex && studentList.getSelectedIndex()!=-1) {
 					selectedStudentDetails = studentDetailList.get(studentList.getSelectedIndex());
 					removeEntry.setEnabled(true);
 					removeEntry.setFocusable(true);
@@ -97,6 +102,8 @@ public class GUIUserFrame extends JFrame {
 					}
 				}
 			}
+			
+			
 		};
 
 		studentList.addListSelectionListener(listSelectionListener);
@@ -117,7 +124,6 @@ public class GUIUserFrame extends JFrame {
 		actionController.addEntry(new StudentDetails("Sai Kiran", "s", "ss", true));
 		actionController.addEntry(new StudentDetails("Moe", "s", "ss", false));
 		actionController.addEntry(new StudentDetails("Mahesh", "s", "ss", false));
-		actionController.addEntry(new StudentDetails("Swathi", "s", "ss", false));
 
 		tablePane.setPreferredSize(new Dimension(350, 150));
 
