@@ -125,7 +125,7 @@ public class GUIUserFrame extends JFrame {
 		actionController.addEntry(new StudentDetails("Moe", "s", "ss", false));
 		actionController.addEntry(new StudentDetails("Mahesh", "s", "ss", false));
 
-		tablePane.setPreferredSize(new Dimension(350, 150));
+		tablePane.setPreferredSize(new Dimension(380, 150));
 
 		panel2.add(tablePane);
 
@@ -141,7 +141,7 @@ public class GUIUserFrame extends JFrame {
 		jFrame.add(empty_indicatorJLabel, BorderLayout.SOUTH);
 		empty_indicatorJLabel.setBorder(new EmptyBorder(10, 5, 30, 5));
 
-		jFrame.setSize(550, 350);
+		jFrame.setSize(550, 400);
 		jFrame.setVisible(true);
 		jFrame.setLocationRelativeTo(null);
 		jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
